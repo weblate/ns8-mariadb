@@ -1,57 +1,65 @@
-# ns8-mariadb
+# mariadb && PhpMyAdmin
 
-This is a template module for [NethServer 8](https://github.com/NethServer/ns8-core).
-To start a new module from it:
+Start and configure mariadb instance.
 
-1. Click on [Use this template](https://github.com/NethServer/ns8-mariadb/generate).
-   Name your repo with `ns8-` prefix (e.g. `ns8-mymodule`). 
-   Do not end your module name with a number, like ~~`ns8-baaad2`~~!
+The module uses : 
 
-1. An automated initialization workflow starts: wait for its completion.
-   You can follow the run inside the "Actions" tab, the workflow is named "Initial commit"
-
-1. You can now clone the repository
-
-1. Edit this `README.md` file, by replacing this section with your module
-   description
-
-1. Commit and push your local changes
+docker.io/library/phpmyadmin  5.1.1
+docker.io/library/mariadb     10.6.5
 
 ## Install
 
-Instantiate the module with:
+Instantiate the module:
 
-    add-module ghcr.io/nethserver/mariadb:latest 1
+```
+add-module ghcr.io/nethserver/mariadb:latest 1
+```
 
 The output of the command will return the instance name.
 Output example:
-
-    {"module_id": "mariadb1", "image_name": "mariadb", "image_url": "ghcr.io/nethserver/mariadb:latest"}
+```
+{'module_id': 'mariadb1', 'image_name': 'mariadb', 'image_url': 'ghcr.io/nethserver/mariadb:latest'}
+```
 
 ## Configure
 
-Let's assume that the mariadb instance is named `mariadb1`.
+Let's assume that the mariadb istance is named `mariadb1`.
 
-Launch `configure-module`, by setting the following parameters:
-- `<MODULE_PARAM1_NAME>`: <MODULE_PARAM1_DESCRIPTION>
-- `<MODULE_PARAM2_NAME>`: <MODULE_PARAM2_DESCRIPTION>
-- ...
+Then launch `configure-module`, by setting the following parameters:
 
 Example:
-
-    api-cli run module/mariadb1/configure-module --data '{}'
+```
+[root@fedora mariadb]# api-cli run configure-module --agent module/mariadb1 --data - <<EOF
+{ 
+"path": "/phpmyadmin", 
+"http2https": true
+}
+EOF
+```
 
 The above command will:
+- validate the /webpath (if not already used by another application.)
 - start and configure the mariadb instance
-- (describe configuration process)
-- ...
+- retrieve two random ports, one for the phpmyadmin container the other for the external port to connect the mysql client
 
-Send a test HTTP request to the mariadb backend service:
-
-    curl http://127.0.0.1/mariadb/
 
 ## Uninstall
 
 To uninstall the instance:
 
-    remove-module --no-preserve mariadb1
+```
+remove-module mariadb1 --no-preserve
+```
+
+## retrieve configuration
+
+You can retrieve the configuration like the user interface 
+
+```
+api-cli run get-configuration --agent module/mariadb1 --data null
+Warning: using user "cluster" credentials from the environment
+{
+"path": "/path", 
+"http2https": true
+}
+```
