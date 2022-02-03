@@ -222,7 +222,7 @@ export default {
         this.createClusterTaskForApp({
           action: taskAction,
           data: {
-            id: "mariadb", // TODO
+            id: "mariadb",
           },
           extra: {
             title: this.$t("action." + taskAction),
@@ -262,7 +262,7 @@ export default {
         this.createClusterTaskForApp({
           action: taskAction,
           extra: {
-            title: this.$t("action." + taskAction),
+            title: this.core.$t("action." + taskAction),
             isNotificationHidden: true,
           },
         })

@@ -80,6 +80,7 @@ export default {
       return this.getPage() === page;
     },
     goToPath(path) {
+      //// remove method
       if (this.core.$route.fullPath != path) {
         this.core.$router.push(path);
       }
