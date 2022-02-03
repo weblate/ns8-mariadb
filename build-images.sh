@@ -3,10 +3,10 @@
 # Terminate on error
 set -e
 
-# Prepare variables for later use
+# Prepare variables for later user
 images=()
-# The image will be pushed to GitHub container registry
-repobase="${REPOBASE:-ghcr.io/nethserver}"
+# The image willbe pushed to GitHub image registry under nethserver organization
+repobase="ghcr.io/nethserver"
 # Configure the image name
 reponame="mariadb"
 
@@ -16,26 +16,25 @@ container=$(buildah from scratch)
 # Reuse existing nodebuilder-mariadb container, to speed up builds
 if ! buildah containers --format "{{.ContainerName}}" | grep -q nodebuilder-mariadb; then
     echo "Pulling NodeJS runtime..."
-    buildah from --name nodebuilder-mariadb -v "${PWD}:/usr/src:Z" docker.io/library/node:lts
+    buildah from --name nodebuilder-mariadb -v "${PWD}:/usr/src/mariadb:Z" docker.io/library/node:lts
 fi
 
 echo "Build static UI files with node..."
-buildah run nodebuilder-mariadb sh -c "cd /usr/src/ui && yarn install && yarn build"
+buildah run nodebuilder-mariadb sh -c "cd /usr/src/mariadb/ui       && yarn install && yarn build"
 
 # Add imageroot directory to the container image
 buildah add "${container}" imageroot /imageroot
 buildah add "${container}" ui/dist /ui
 # Setup the entrypoint, ask to reserve one TCP port with the label and set a rootless container
 buildah config --entrypoint=/ \
-    --label="org.nethserver.authorizations=traefik@any:routeadm" \
-    --label="org.nethserver.tcp-ports-demand=1" \
+    --label="org.nethserver.tcp-ports-demand=2" \
     --label="org.nethserver.rootfull=0" \
-    --label="org.nethserver.images=docker.io/jmalloc/echo-server:latest" \
+    --label="org.nethserver.authorizations=traefik@any:routeadm" \
+    --label="org.nethserver.images=docker.io/mariadb:10.6.5 docker.io/phpmyadmin:5.1.1" \
     "${container}"
-# Commit the image
+# Commit everything
 buildah commit "${container}" "${repobase}/${reponame}"
 
-# Append the image URL to the images array
 images+=("${repobase}/${reponame}")
 
 #
