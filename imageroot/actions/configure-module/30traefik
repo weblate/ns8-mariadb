@@ -20,30 +20,47 @@
 # along with NethServer.  If not, see COPYING.
 #
 
-# Configure mariadb and phpmyadmin env
-# Input example:
-#
-#  {"wiki_name": "mywiki", "username": "admin", "password": "admin", "email": "admin@test.local", "user_full_name": "Administrator"}
+# Configure traefik route for Dokuwiki
 
 import os
-import json
 import sys
-# agent is a NethServer library which provides function to communicate with the agent
+import json
 import agent
+import agent.tasks
 
 # Try to parse the stdin as JSON.
 # If parsing fails, output everything to stderr
 data = json.load(sys.stdin)
 
-# mariadb use the first random port, traefik the second one
-env_tcp_ports = os.environ["TCP_PORTS"].split(',')
-mariadb_tcp_port = env_tcp_ports[0]
-traefik_tcp_port = env_tcp_ports[1]
+# Setup default values
+path = data.get("path")
+h2hs = data.get("http2https", True)
+
 # Talk with agent using file descriptor.
 # Setup configuration from user input.
-agent.set_env("MARIADB_TCP_PORT", mariadb_tcp_port)
-agent.set_env("TRAEFIK_TCP_PORT", traefik_tcp_port)
+agent.set_env("TRAEFIK_PATH", path)
+agent.set_env("TRAEFIK_HTTP2HTTPS", h2hs)
 
 # Make sure everything is saved inside the environment file
 # just before starting systemd unit
 agent.dump_env()
+
+# Find default traefik instance for current node
+default_traefik_id = agent.resolve_agent_id('traefik@node')
+if default_traefik_id is None:
+    sys.exit(2)
+
+# Configure traefik virtual host
+response = agent.tasks.run(
+    agent_id=default_traefik_id,
+    action='set-route',
+    data={
+        'instance': os.environ['MODULE_ID'],
+        'url': f'http://127.0.0.1:{os.environ["TRAEFIK_TCP_PORT"]}',
+        'path': path,
+        'http2https': h2hs
+    },
+)
+
+# Check if traefik configuration has been successfull
+agent.assert_exp(response['exit_code'] == 0)

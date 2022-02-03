@@ -1,8 +1,27 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Configure mariadb",
-    "$id": "http://nethserver.org/json-schema/task/input/mariadb/configure",
-    "description": "Configure mariadb",
-    "examples": [],
-    "type": "object"
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Configure mariadb",
+  "$id": "http://nethserver.org/json-schema/task/input/mariadb/configure",
+  "description": "Configure mariadb",
+  "examples": [
+    {
+    }
+  ],
+  "type": "object",
+  "required": [
+    "path",
+    "http2https"
+  ],
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "web path for the web application, like '/phpmyadmin'",
+      "pattern": "^/[a-zA-Z0-9]+"
+    },
+    "http2https": {
+      "type": "boolean",
+      "title": "HTTP to HTTPS redirection",
+      "description": "Redirect all the HTTP requests to HTTPS"
+    }
+  }
 }

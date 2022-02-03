@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Copyright (C) 2022 Nethesis S.r.l.
+# Copyright (C) 2021 Nethesis S.r.l.
 # http://www.nethesis.it - nethserver@nethesis.it
 #
 # This script is part of NethServer.
@@ -19,3 +19,12 @@
 # You should have received a copy of the GNU General Public License
 # along with NethServer.  If not, see COPYING.
 #
+
+set -e
+
+# Redirect any output to the journal (stderr)
+exec 1>&2
+
+# Enable and restart the service
+systemctl --user enable mariadb.service
+systemctl --user restart mariadb.service
