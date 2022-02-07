@@ -63,3 +63,12 @@ Warning: using user "cluster" credentials from the environment
 "http2https": true
 }
 ```
+
+## Connect to mysl of the container
+
+it is possible to use directly mysql inside the container
+
+```
+ssh mariadb1@localhost
+podman exec -ti mariadb-app mysql
+```
