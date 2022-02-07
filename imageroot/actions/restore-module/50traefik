@@ -20,25 +20,29 @@
 # along with NethServer.  If not, see COPYING.
 #
 
-#
-# Read mariadb configuration
-#
+# Configure traefik route for Dokuwiki
 
 import os
 import sys
-import json
 import agent
+import agent.tasks
 
-# Prepare return variable
-config = {}
+# Find default traefik instance for current node
+default_traefik_id = agent.resolve_agent_id('traefik@node')
+if default_traefik_id is None:
+    sys.exit(2)
 
-# Read current configuration from Redis
-env = f'module/{os.environ["MODULE_ID"]}/environment'
-rdb = agent.redis_connect()
-config["mariadb_tcp_port"] = rdb.hget(env, "MARIADB_TCP_PORT");
-config["path"] =  rdb.hget(env, "TRAEFIK_PATH");
-config["http2https"] =  rdb.hget(env, "TRAEFIK_HTTP2HTTPS") == "True";
-# config["lets_encrypt"] =  rdb.hget(env, "TRAEFIK_LETS_ENCRYPT") == "True";
+# Configure traefik virtual host
+response = agent.tasks.run(
+    agent_id=default_traefik_id,
+    action='set-route',
+    data={
+        'instance': os.environ['MODULE_ID'],
+        'url': f'http://127.0.0.1:{os.environ["TRAEFIK_TCP_PORT"]}',
+        'path': os.environ["TRAEFIK_PATH"],
+        'http2https': os.environ["TRAEFIK_HTTP2HTTPS"] == True
+    },
+)
 
-# Dump the configuratio to stdou
-json.dump(config, fp=sys.stdout)
+# Check if traefik configuration has been successfull
+agent.assert_exp(response['exit_code'] == 0)

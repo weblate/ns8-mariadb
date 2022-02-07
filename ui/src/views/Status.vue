@@ -5,8 +5,7 @@
         <h2>{{ $t("status.title") }}</h2>
       </div>
     </div>
-    <!-- sample status page -->
-    <!-- <div v-if="error.getStatus" class="bx--row">
+    <div v-if="error.getStatus" class="bx--row">
       <div class="bx--col">
         <NsInlineNotification
           kind="error"
@@ -75,9 +74,9 @@
           light
         />
       </div>
-    </div> -->
+    </div>
     <!-- services -->
-    <!-- <div class="bx--row">
+    <div class="bx--row">
       <div class="bx--col-lg-16 page-subtitle">
         <h4>{{ $tc("status.services", 2) }}</h4>
       </div>
@@ -114,9 +113,9 @@
           ></cv-skeleton-text>
         </cv-tile>
       </div>
-    </div> -->
+    </div>
     <!-- images -->
-    <!-- <div class="bx--row">
+    <div class="bx--row">
       <div class="bx--col-lg-16 page-subtitle">
         <h4>{{ $tc("status.app_images", 2) }}</h4>
       </div>
@@ -167,9 +166,9 @@
           ></cv-skeleton-text>
         </cv-tile>
       </div>
-    </div> -->
+    </div>
     <!-- volumes -->
-    <!-- <div class="bx--row">
+    <div class="bx--row">
       <div class="bx--col-lg-16 page-subtitle">
         <h4>{{ $tc("status.app_volumes", 2) }}</h4>
       </div>
@@ -220,22 +219,23 @@
           ></cv-skeleton-text>
         </cv-tile>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
-// import to from "await-to-js";
+import to from "await-to-js";
 import { mapState } from "vuex";
 import {
   QueryParamService,
   TaskService,
+  DateTimeService,
   IconService,
 } from "@nethserver/ns8-ui-lib";
 
 export default {
   name: "Status",
-  mixins: [TaskService, QueryParamService, IconService],
+  mixins: [TaskService, QueryParamService, DateTimeService, IconService],
   pageTitle() {
     return this.$t("status.title") + " - " + this.appName;
   },
@@ -262,10 +262,32 @@ export default {
   },
   computed: {
     ...mapState(["instanceName", "instanceLabel", "core", "appName"]),
+    failedServices() {
+      if (!this.status) {
+        return 0;
+      } else {
+        return this.status.services.filter((s) => s.failed).length;
+      }
+    },
+    activeServices() {
+      if (!this.status) {
+        return 0;
+      } else {
+        return this.status.services.filter((s) => s.active).length;
+      }
+    },
+    inactiveServices() {
+      if (!this.status) {
+        return 0;
+      } else {
+        return this.status.services.filter((s) => !s.active && !s.failed)
+          .length;
+      }
+    },
   },
   created() {
-    // this.getStatus();
-    // this.listBackupRepositories();
+    this.getStatus();
+    this.listBackupRepositories();
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
@@ -278,6 +300,7 @@ export default {
     next();
   },
   mounted() {
+    // show status page after a little delay to avoid page flickering when user directly access a page different from status
     this.redirectTimeout = setTimeout(
       () => (this.isRedirectChecked = true),
       200
@@ -287,118 +310,121 @@ export default {
     clearTimeout(this.redirectTimeout);
   },
   methods: {
-    // async getStatus() {
-    //   this.loading.status = true;
-    //   this.error.getStatus = "";
-    //   const taskAction = "get-status";
-    //   // register to task completion
-    //   this.core.$root.$once(
-    //     taskAction + "-completed",
-    //     this.getStatusCompleted
-    //   );
-    //   const res = await to(
-    //     this.createModuleTaskForApp(this.instanceName, {
-    //       action: taskAction,
-    //       extra: {
-    //         title: this.$t("action." + taskAction),
-    //         isNotificationHidden: true,
-    //       },
-    //     })
-    //   );
-    //   const err = res[0];
-    //   if (err) {
-    //     console.error(`error creating task ${taskAction}`, err);
-    //     this.error.getStatus = this.getErrorMessage(err);
-    //     return;
-    //   }
-    // },
-    // getStatusCompleted(taskContext, taskResult) {
-    //   this.status = taskResult.output;
-    //   this.loading.status = false;
-    // },
-    // async listBackupRepositories() {
-    //   this.loading.listBackupRepositories = true;
-    //   this.error.listBackupRepositories = "";
-    //   const taskAction = "list-backup-repositories";
-    //
-    //   // register to task completion
-    //   this.core.$root.$once(
-    //     taskAction + "-completed",
-    //     this.listBackupRepositoriesCompleted
-    //   );
-    //
-    //   const res = await to(
-    //     this.createClusterTaskForApp({
-    //       action: taskAction,
-    //       extra: {
-    //         title: this.core.$t("action." + taskAction),
-    //         isNotificationHidden: true,
-    //       },
-    //     })
-    //   );
-    //   const err = res[0];
-    //
-    //   if (err) {
-    //     console.error(`error creating task ${taskAction}`, err);
-    //     this.error.listBackupRepositories = this.getErrorMessage(err);
-    //     return;
-    //   }
-    // },
-    // listBackupRepositoriesCompleted(taskContext, taskResult) {
-    //   let backupRepositories = taskResult.output.sort(
-    //     this.sortByProperty("name")
-    //   );
-    //   this.backupRepositories = backupRepositories;
-    //   this.loading.listBackupRepositories = false;
-    //   this.listBackups();
-    // },
-    // async listBackups() {
-    //   this.loading.listBackups = true;
-    //   this.error.listBackups = "";
-    //   const taskAction = "list-backups";
-    //
-    //   // register to task completion
-    //   this.core.$root.$once(
-    //     taskAction + "-completed",
-    //     this.listBackupsCompleted
-    //   );
-    //
-    //   const res = await to(
-    //     this.createClusterTaskForApp({
-    //       action: taskAction,
-    //       extra: {
-    //         title: this.core.$t("action." + taskAction),
-    //         isNotificationHidden: true,
-    //       },
-    //     })
-    //   );
-    //   const err = res[0];
-    //
-    //   if (err) {
-    //     console.error(`error creating task ${taskAction}`, err);
-    //     this.error.listBackups = this.getErrorMessage(err);
-    //     return;
-    //   }
-    // },
-    // listBackupsCompleted(taskContext, taskResult) {
-    //   let backups = taskResult.output.backups;
-    //   backups.sort(this.sortByProperty("name"));
-    //
-    //   // repository name
-    //
-    //   for (const backup of backups) {
-    //     const repo = this.backupRepositories.find(
-    //       (r) => r.id == backup.repository
-    //     );
-    //
-    //     if (repo) {
-    //       backup.repoName = repo.name;
-    //     }
-    //   }
-    //   this.backups = backups;
-    //
-    //   this.loading.listBackups = false;
-    // },
+    async getStatus() {
+      this.loading.status = true;
+      this.error.getStatus = "";
+      const taskAction = "get-status";
+
+      // register to task completion
+      this.core.$root.$once(
+        taskAction + "-completed",
+        this.getStatusCompleted
+      );
+
+      const res = await to(
+        this.createModuleTaskForApp(this.instanceName, {
+          action: taskAction,
+          extra: {
+            title: this.$t("action." + taskAction),
+            isNotificationHidden: true,
+          },
+        })
+      );
+      const err = res[0];
+
+      if (err) {
+        console.error(`error creating task ${taskAction}`, err);
+        this.error.getStatus = this.getErrorMessage(err);
+        return;
+      }
+    },
+    getStatusCompleted(taskContext, taskResult) {
+      this.status = taskResult.output;
+      this.loading.status = false;
+    },
+    async listBackupRepositories() {
+      this.loading.listBackupRepositories = true;
+      this.error.listBackupRepositories = "";
+      const taskAction = "list-backup-repositories";
+
+      // register to task completion
+      this.core.$root.$once(
+        taskAction + "-completed",
+        this.listBackupRepositoriesCompleted
+      );
+
+      const res = await to(
+        this.createClusterTaskForApp({
+          action: taskAction,
+          extra: {
+            title: this.core.$t("action." + taskAction),
+            isNotificationHidden: true,
+          },
+        })
+      );
+      const err = res[0];
+
+      if (err) {
+        console.error(`error creating task ${taskAction}`, err);
+        this.error.listBackupRepositories = this.getErrorMessage(err);
+        return;
+      }
+    },
+    listBackupRepositoriesCompleted(taskContext, taskResult) {
+      let backupRepositories = taskResult.output.sort(
+        this.sortByProperty("name")
+      );
+      this.backupRepositories = backupRepositories;
+      this.loading.listBackupRepositories = false;
+      this.listBackups();
+    },
+    async listBackups() {
+      this.loading.listBackups = true;
+      this.error.listBackups = "";
+      const taskAction = "list-backups";
+
+      // register to task completion
+      this.core.$root.$once(
+        taskAction + "-completed",
+        this.listBackupsCompleted
+      );
+
+      const res = await to(
+        this.createClusterTaskForApp({
+          action: taskAction,
+          extra: {
+            title: this.core.$t("action." + taskAction),
+            isNotificationHidden: true,
+          },
+        })
+      );
+      const err = res[0];
+
+      if (err) {
+        console.error(`error creating task ${taskAction}`, err);
+        this.error.listBackups = this.getErrorMessage(err);
+        return;
+      }
+    },
+    listBackupsCompleted(taskContext, taskResult) {
+      let backups = taskResult.output.backups;
+      backups.sort(this.sortByProperty("name"));
+
+      // repository name
+
+      for (const backup of backups) {
+        const repo = this.backupRepositories.find(
+          (r) => r.id == backup.repository
+        );
+
+        if (repo) {
+          backup.repoName = repo.name;
+        }
+      }
+      this.backups = backups;
+
+      this.loading.listBackups = false;
+    },
   },
 };
 </script>
@@ -406,8 +432,8 @@ export default {
 <style scoped lang="scss">
 @import "../styles/carbon-utils";
 
-// .break-word {
-//   word-wrap: break-word;
-//   max-width: 30vw;
-// }
+.break-word {
+  word-wrap: break-word;
+  max-width: 30vw;
+}
 </style>

@@ -903,19 +903,19 @@
     "@babel/helper-validator-identifier" "^7.14.5"
     to-fast-properties "^2.0.0"
 
-"@carbon/charts-vue@^0.54.4":
-  version "0.54.4"
-  resolved "https://registry.yarnpkg.com/@carbon/charts-vue/-/charts-vue-0.54.4.tgz#7925c87d8ac125bda8208f6e63d439af5d13b1a7"
-  integrity sha512-BQixwqmqa8w5f9fzcG4EcR5IVD+TBWHFD/VzYeaYdTR4krbUYoUTsGO1Mze1oQoN/ii7fh2T1lXv7RHHPp3OWA==
+"@carbon/charts-vue@^0.50.4":
+  version "0.50.10"
+  resolved "https://registry.yarnpkg.com/@carbon/charts-vue/-/charts-vue-0.50.10.tgz#46f83378208bf8ff36537b2414c2b89bbcfbd628"
+  integrity sha512-udST+9Inc9BqHqndR4hIwF64Fn6RJsJxL3DzROGHOGdu6KMnSROJws8NoxmXG5XUtvca8Ds/svuAm5wEKP2Y6w==
   dependencies:
-    "@carbon/charts" "^0.54.4"
+    "@carbon/charts" "^0.50.10"
     "@carbon/telemetry" "0.0.0-alpha.6"
     vue "2.5.21"
 
-"@carbon/charts@^0.54.4":
-  version "0.54.4"
-  resolved "https://registry.yarnpkg.com/@carbon/charts/-/charts-0.54.4.tgz#8e62c5d4297c82cb63075d69d46b713df00c1f77"
-  integrity sha512-70y7VhGcLOr0rYObhT+72W06PHA204x6WwdQTRuums6UdL9Ze6i0C2FHSmdOl6WadJZc3LSb8ems8YV1QSP+xw==
+"@carbon/charts@^0.50.10":
+  version "0.50.10"
+  resolved "https://registry.yarnpkg.com/@carbon/charts/-/charts-0.50.10.tgz#ec5291e1f65dbd7dd6521f50f117f4368909a49e"
+  integrity sha512-FvCej1XRWYTQqxWXGfX4de7xAs3YCp9YPJ2nxYI85MD4mgFSFVCXaqPpjwK2vFKBMNI/B9e1LigrSCY6TlY8tg==
   dependencies:
     "@carbon/colors" "10.29.0"
     "@carbon/telemetry" "0.0.0-alpha.6"
@@ -1047,10 +1047,10 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@nethserver/ns8-ui-lib@^0.0.53":
-  version "0.0.53"
-  resolved "https://registry.yarnpkg.com/@nethserver/ns8-ui-lib/-/ns8-ui-lib-0.0.53.tgz#cda159fe7e271175a81361484f5d4be7311808dc"
-  integrity sha512-aahGpGmv3JvpZQ/jDvkwKsDIAMs/FH5Jj1D03zErm0uBt93vgsraah2X6VaTOm+3v78mEiKLO5460gKPj3Zp6g==
+"@nethserver/ns8-ui-lib@^0.0.54":
+  version "0.0.54"
+  resolved "https://registry.yarnpkg.com/@nethserver/ns8-ui-lib/-/ns8-ui-lib-0.0.54.tgz#c6f44e8d0c9db7c25d093dc7fe1e4ee60a6a7679"
+  integrity sha512-aZdx4ULxkydK0boaczN6pe/EnhpNRJy2jaojE+ewLaMNX0KvM2ZETYPD8yXLFxMFfuiymW3GeVv0FPTHjG3ojg==
   dependencies:
     "@rollup/plugin-json" "^4.1.0"
     core-js "^3.15.2"

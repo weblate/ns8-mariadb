@@ -1,7 +1,6 @@
 #!/bin/bash
-
 #
-# Copyright (C) 2022 Nethesis S.r.l.
+# Copyright (C) 2021 Nethesis S.r.l.
 # http://www.nethesis.it - nethserver@nethesis.it
 #
 # This script is part of NethServer.
@@ -19,3 +18,18 @@
 # You should have received a copy of the GNU General Public License
 # along with NethServer.  If not, see COPYING.
 #
+
+#
+# only used if we use a web path /phpmyadmin, exit if we use a vhost phpmyadmin.domain.com
+#
+
+if [[ -n ${TRAEFIK_HOST} ]]; then
+    exit 0
+fi
+
+mkdir -p /etc/apache2/sites-available/
+
+printf "Alias ${TRAEFIK_PATH}  /var/www/html\n<Directory  /var/www/html/>\n  Require all granted\n</Directory>\n" > /etc/apache2/sites-available/phpmyadmin.conf
+
+a2ensite phpmyadmin.conf
+service apache2 reload

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env python3
 
 #
 # Copyright (C) 2022 Nethesis S.r.l.
@@ -20,6 +20,20 @@
 # along with NethServer.  If not, see COPYING.
 #
 
-# If the control reaches this step, the service can be enabled and started
+import sys
+import json
+import agent
 
-systemctl --user enable --now mariadb.service
+request = json.load(sys.stdin)
+
+original_environment = request['environment']
+
+for evar in [
+        "MARIADB_TCP_PORT",
+        "TRAEFIK_TCP_PORT",
+        "TRAEFIK_PATH",
+        "TRAEFIK_HTTP2HTTPS"
+    ]:
+    agent.set_env(evar, original_environment[evar])
+
+agent.dump_env()

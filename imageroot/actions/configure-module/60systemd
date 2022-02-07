@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/bin/bash
 
 #
 # Copyright (C) 2021 Nethesis S.r.l.
@@ -20,25 +20,11 @@
 # along with NethServer.  If not, see COPYING.
 #
 
-#
-# Read mariadb configuration
-#
+set -e
 
-import os
-import sys
-import json
-import agent
+# Redirect any output to the journal (stderr)
+exec 1>&2
 
-# Prepare return variable
-config = {}
-
-# Read current configuration from Redis
-env = f'module/{os.environ["MODULE_ID"]}/environment'
-rdb = agent.redis_connect()
-config["mariadb_tcp_port"] = rdb.hget(env, "MARIADB_TCP_PORT");
-config["path"] =  rdb.hget(env, "TRAEFIK_PATH");
-config["http2https"] =  rdb.hget(env, "TRAEFIK_HTTP2HTTPS") == "True";
-# config["lets_encrypt"] =  rdb.hget(env, "TRAEFIK_LETS_ENCRYPT") == "True";
-
-# Dump the configuratio to stdou
-json.dump(config, fp=sys.stdout)
+# Enable and restart the service
+systemctl --user enable mariadb.service
+systemctl --user restart mariadb.service
