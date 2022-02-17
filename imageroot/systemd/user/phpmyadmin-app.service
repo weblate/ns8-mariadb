@@ -6,6 +6,7 @@ After=mariadb.service
 [Service]
 Environment=PODMAN_SYSTEMD_UNIT=%n
 EnvironmentFile=%S/state/environment
+EnvironmentFile=%S/state/secrets/passwords.secret
 Restart=always
 TimeoutStopSec=70
 ExecStartPre=/bin/rm -f %t/phpmyadmin-app.pid %t/phpmyadmin-app.ctr-id
@@ -14,11 +15,10 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/phpmyadmin-app.pid \
     --pod-id-file %t/mariadb.pod-id --replace -d --name phpmyadmin-app \
     --env-file=%S/state/environment -e PMA_HOST=127.0.0.1 -e PMA_PORT=3306 \
     -e PMA_PMADB=phpmyadmin -e PMA_CONTROLUSER=phpmyadmin \
-    -e PMA_CONTROLPASS_FILE=/run/secrets/phpmyadmin.secret \
-    --secret phpmyadmin.secret \
+    -e PMA_CONTROLPASS=${MARIADB_PASSWORD} \
     -v %S/scripts/create_phpmyadmin_web_alias.sh:/docker-entrypoint.d/create_phpmyadmin_web_alias.sh:Z \
     -v config.user.inc.php:/etc/phpmyadmin/config.user.inc.php:Z \
-    -v sql:/var/www/html/sql:Z \
+    -v sql:/var/www/html/sql:z \
     ${PHPMYADMIN_IMAGE}
 ExecStartPost=/usr/bin/podman exec  phpmyadmin-app /bin/bash /docker-entrypoint.d/create_phpmyadmin_web_alias.sh
 ExecStop=/usr/bin/podman stop --ignore --cidfile %t/phpmyadmin-app.ctr-id -t 10
