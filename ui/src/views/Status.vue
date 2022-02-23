@@ -51,7 +51,7 @@
       <div class="bx--col-md-4 bx--col-max-4">
         <NsBackupCard
           :title="core.$t('backup.title')"
-          :noBackupMessage="core.$t('backup.no_backup_configured')"
+          :noBackupMessage="core.$t('backup.no_backup')"
           :scheduleBackupLabel="core.$t('backup.configure')"
           :goToBackupLabel="core.$t('backup.go_to_backup')"
           :repositoryLabel="core.$t('backup.repository')"
