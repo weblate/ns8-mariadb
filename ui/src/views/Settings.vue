@@ -18,20 +18,20 @@
     <div class="bx--row">
       <div class="bx--col-lg-16">
         <cv-tile :light="true">
-          <cv-form @submit.prevent="saveSettings">
+          <cv-form @submit.prevent="configureModule">
             <cv-text-input
               :label="$t('settings.phpmyadmin_path')"
               placeholder="/phpmyadmin"
               v-model.trim="path"
               class="mg-bottom"
               :invalid-message="$t(error.path)"
-              :disabled="loading.settings"
+              :disabled="loading.getConfiguration || loading.configureModule"
               ref="path"
             >
             </cv-text-input>
             <template v-if="mariadb_tcp_port">
-              <span class="mg-bottom"> 
-                {{ $t('settings.mariadb_tcp_port')}}
+              <span class="mg-bottom">
+                {{ $t("settings.mariadb_tcp_port") }}
                 <cv-tooltip
                   alignment="start"
                   direction="bottom"
@@ -41,34 +41,36 @@
                 </cv-tooltip>
               </span>
               <span>:</span>
-              <span  class="mg-bottom mg-left" > 
-                {{mariadb_tcp_port}} 
+              <span class="mg-bottom mg-left">
+                {{ mariadb_tcp_port }}
               </span>
-            <section>
-              <span> {{$t('settings.phpmyadmin_url')}}
-                <cv-tooltip
-                  alignment="start"
-                  direction="bottom"
-                  :tip="$t('settings.admin_login_tips')"
-                  class="info mg-bottom"
+              <section>
+                <span>
+                  {{ $t("settings.phpmyadmin_url") }}
+                  <cv-tooltip
+                    alignment="start"
+                    direction="bottom"
+                    :tip="$t('settings.admin_login_tips')"
+                    class="info mg-bottom"
+                  >
+                  </cv-tooltip>
+                </span>
+                <span>:</span>
+                <cv-link
+                  class="mg-bottom mg-left"
+                  :href="'http://' + hostname + path"
+                  target="_blank"
+                  :inline="false"
                 >
-                </cv-tooltip>
-              </span>
-              <span>:</span>
-              <cv-link class="mg-bottom mg-left"
-                :href="'http://'+ hostname + path"
-                target="_blank"
-                :inline= false
-                >
-                {{$t('settings.link')}}
-              </cv-link>
-            </section>
+                  {{ $t("settings.link") }}
+                </cv-link>
+              </section>
             </template>
             <!-- <cv-toggle
               value="letsEncrypt"
               :label="$t('settings.lets_encrypt')"
               v-model="isLetsEncryptEnabled"
-              :disabled="loading.settings"
+              :disabled="loading.getConfiguration || loading.configureModule"
               class="mg-bottom"
             >
               <template slot="text-left">{{
@@ -82,7 +84,7 @@
               value="httpToHttps"
               :label="$t('settings.http_to_https')"
               v-model="isHttpToHttpsEnabled"
-              :disabled="loading.settings"
+              :disabled="loading.getConfiguration || loading.configureModule"
               class="mg-bottom"
             >
               <template slot="text-left">{{
@@ -105,8 +107,8 @@
             <NsButton
               kind="primary"
               :icon="Save20"
-              :loading="loading.settings"
-              :disabled="loading.settings"
+              :loading="loading.configureModule"
+              :disabled="loading.getConfiguration || loading.configureModule"
               >{{ $t("settings.save") }}</NsButton
             >
           </cv-form>
@@ -144,7 +146,8 @@ export default {
       // isLetsEncryptEnabled: false,
       isHttpToHttpsEnabled: false,
       loading: {
-        settings: true,
+        getConfiguration: false,
+        configureModule: false,
       },
       error: {
         getConfiguration: "",
@@ -173,11 +176,19 @@ export default {
   },
   methods: {
     async getConfiguration() {
-      this.loading.settings = true;
+      this.loading.getConfiguration = true;
       this.error.getConfiguration = "";
       const taskAction = "get-configuration";
 
+      // register to task error
+      this.core.$root.$off(taskAction + "-aborted");
+      this.core.$root.$once(
+        taskAction + "-aborted",
+        this.getConfigurationAborted
+      );
+
       // register to task completion
+      this.core.$root.$off(taskAction + "-completed");
       this.core.$root.$once(
         taskAction + "-completed",
         this.getConfigurationCompleted
@@ -197,10 +208,25 @@ export default {
       if (err) {
         console.error(`error creating task ${taskAction}`, err);
         this.error.getConfiguration = this.getErrorMessage(err);
+        this.loading.getConfiguration = false;
         return;
       }
     },
-    validateSaveSettings() {
+    getConfigurationAborted(taskResult, taskContext) {
+      console.error(`${taskContext.action} aborted`, taskResult);
+      this.error.getConfiguration = this.core.$t("error.generic_error");
+      this.loading.getConfiguration = false;
+    },
+    getConfigurationCompleted(taskContext, taskResult) {
+      const config = taskResult.output;
+      this.path = config.path;
+      this.mariadb_tcp_port = config.mariadb_tcp_port;
+      // this.isLetsEncryptEnabled = config.lets_encrypt;
+      this.isHttpToHttpsEnabled = config.http2https;
+      this.loading.getConfiguration = false;
+      this.focusElement("path");
+    },
+    validateConfigureModule() {
       this.clearErrors(this);
       let isValidationOk = true;
       if (!this.path) {
@@ -212,8 +238,8 @@ export default {
       }
       return isValidationOk;
     },
-    saveSettingsValidationFailed(validationErrors) {
-      this.loading.settings = false;
+    configureModuleValidationFailed(validationErrors) {
+      this.loading.configureModule = false;
       let focusAlreadySet = false;
 
       for (const validationError of validationErrors) {
@@ -227,27 +253,34 @@ export default {
         }
       }
     },
-    async saveSettings() {
-      const isValidationOk = this.validateSaveSettings();
+    async configureModule() {
+      const isValidationOk = this.validateConfigureModule();
       if (!isValidationOk) {
         return;
       }
 
-      this.loading.settings = true;
+      this.loading.configureModule = true;
       const taskAction = "configure-module";
+
+      // register to task error
+      this.core.$root.$off(taskAction + "-aborted");
+      this.core.$root.$once(
+        taskAction + "-aborted",
+        this.configureModuleAborted
+      );
 
       // register to task validation
       this.core.$root.$off(taskAction + "-validation-failed");
       this.core.$root.$once(
         taskAction + "-validation-failed",
-        this.saveSettingsValidationFailed
+        this.configureModuleValidationFailed
       );
 
       // register to task completion
       this.core.$root.$off(taskAction + "-completed");
       this.core.$root.$once(
         taskAction + "-completed",
-        this.saveSettingsCompleted
+        this.configureModuleCompleted
       );
 
       const res = await to(
@@ -271,21 +304,17 @@ export default {
       if (err) {
         console.error(`error creating task ${taskAction}`, err);
         this.error.configureModule = this.getErrorMessage(err);
-        this.loading.settings = false;
+        this.loading.configureModule = false;
         return;
       }
     },
-    getConfigurationCompleted(taskContext, taskResult) {
-      const config = taskResult.output;
-      this.path = config.path;
-      this.mariadb_tcp_port = config.mariadb_tcp_port;
-      // this.isLetsEncryptEnabled = config.lets_encrypt;
-      this.isHttpToHttpsEnabled = config.http2https;
-      this.loading.settings = false;
-      this.focusElement("path");
+    configureModuleAborted(taskResult, taskContext) {
+      console.error(`${taskContext.action} aborted`, taskResult);
+      this.error.configureModule = this.core.$t("error.generic_error");
+      this.loading.configureModule = false;
     },
-    saveSettingsCompleted() {
-      this.loading.settings = false;
+    configureModuleCompleted() {
+      this.loading.configureModule = false;
 
       // reload configuration
       this.getConfiguration();
@@ -299,7 +328,7 @@ export default {
 .mg-bottom {
   margin-bottom: $spacing-06;
 }
-.mg-left{
-    margin-left: $spacing-05;
+.mg-left {
+  margin-left: $spacing-05;
 }
 </style>

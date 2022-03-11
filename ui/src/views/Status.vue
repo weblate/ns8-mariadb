@@ -18,41 +18,29 @@
     <div class="bx--row">
       <div class="bx--col-md-4 bx--col-max-4">
         <NsInfoCard
-          v-if="!loading.status"
           light
-          :title="status.instance"
+          :title="status ? status.instance : ''"
           :description="$t('status.app_instance')"
           :icon="Application32"
+          :loading="loading.status"
           class="min-height-card"
         />
-        <cv-tile v-else light>
-          <cv-skeleton-text
-            :paragraph="true"
-            :line-count="4"
-          ></cv-skeleton-text>
-        </cv-tile>
       </div>
       <div class="bx--col-md-4 bx--col-max-4">
         <NsInfoCard
-          v-if="!loading.status"
           light
-          :title="$t('status.node') + ' ' + status.node"
+          :title="installationNodeTitle"
+          :titleTooltip="installationNodeTitleTooltip"
           :description="$t('status.installation_node')"
           :icon="Chip32"
+          :loading="loading.status"
           class="min-height-card"
         />
-        <cv-tile v-else light>
-          <cv-skeleton-text
-            :paragraph="true"
-            :line-count="4"
-          ></cv-skeleton-text>
-        </cv-tile>
       </div>
       <div class="bx--col-md-4 bx--col-max-4">
         <NsBackupCard
           :title="core.$t('backup.title')"
-          :noBackupMessage="core.$t('backup.no_backup')"
-          :scheduleBackupLabel="core.$t('backup.configure')"
+          :noBackupMessage="core.$t('backup.no_backup_configured')"
           :goToBackupLabel="core.$t('backup.go_to_backup')"
           :repositoryLabel="core.$t('backup.repository')"
           :statusLabel="core.$t('common.status')"
@@ -71,6 +59,19 @@
           :backups="backups"
           :loading="loading.listBackupRepositories || loading.listBackups"
           :coreContext="core"
+          light
+        />
+      </div>
+      <div class="bx--col-md-4 bx--col-max-4">
+        <NsSystemLogsCard
+          :title="core.$t('system_logs.card_title')"
+          :description="
+            core.$t('system_logs.card_description', { name: instanceName })
+          "
+          :buttonLabel="core.$t('system_logs.card_button_label')"
+          :router="core.$router"
+          context="module"
+          :moduleId="instanceName"
           light
         />
       </div>
@@ -262,26 +263,22 @@ export default {
   },
   computed: {
     ...mapState(["instanceName", "instanceLabel", "core", "appName"]),
-    failedServices() {
-      if (!this.status) {
-        return 0;
+    installationNodeTitle() {
+      if (this.status && this.status.node) {
+        if (this.status.node_ui_name) {
+          return this.status.node_ui_name;
+        } else {
+          return this.$t("status.node") + " " + this.status.node;
+        }
       } else {
-        return this.status.services.filter((s) => s.failed).length;
+        return "";
       }
     },
-    activeServices() {
-      if (!this.status) {
-        return 0;
+    installationNodeTitleTooltip() {
+      if (this.status && this.status.node_ui_name) {
+        return this.$t("status.node") + " " + this.status.node;
       } else {
-        return this.status.services.filter((s) => s.active).length;
-      }
-    },
-    inactiveServices() {
-      if (!this.status) {
-        return 0;
-      } else {
-        return this.status.services.filter((s) => !s.active && !s.failed)
-          .length;
+        return "";
       }
     },
   },
@@ -316,10 +313,7 @@ export default {
       const taskAction = "get-status";
 
       // register to task completion
-      this.core.$root.$once(
-        taskAction + "-completed",
-        this.getStatusCompleted
-      );
+      this.core.$root.$once(taskAction + "-completed", this.getStatusCompleted);
 
       const res = await to(
         this.createModuleTaskForApp(this.instanceName, {
