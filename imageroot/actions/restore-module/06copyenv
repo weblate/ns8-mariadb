@@ -19,7 +19,7 @@
 # You should have received a copy of the GNU General Public License
 # along with NethServer.  If not, see COPYING.
 #
-
+import os
 import sys
 import json
 import agent
@@ -29,11 +29,18 @@ request = json.load(sys.stdin)
 original_environment = request['environment']
 
 for evar in [
-        "MARIADB_TCP_PORT",
-        "TRAEFIK_TCP_PORT",
         "TRAEFIK_PATH",
         "TRAEFIK_HTTP2HTTPS"
     ]:
     agent.set_env(evar, original_environment[evar])
+
+# mariadb use the first random port, traefik the second one
+env_tcp_ports = os.environ["TCP_PORTS"].split(',')
+mariadb_tcp_port = env_tcp_ports[0]
+traefik_tcp_port = env_tcp_ports[1]
+# Talk with agent using file descriptor.
+# Setup configuration from user input.
+agent.set_env("MARIADB_TCP_PORT", mariadb_tcp_port)
+agent.set_env("TRAEFIK_TCP_PORT", traefik_tcp_port)
 
 agent.dump_env()
