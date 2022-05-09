@@ -19,6 +19,7 @@ ExecStart=/usr/bin/podman run --conmon-pidfile %t/mariadb-app.pid \
     -v %S/scripts/create_admin_of_phpmyadmin.sql:/docker-entrypoint-initdb.d/create_admin.sql:Z \
     -e MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD} -e MARIADB_DATABASE=phpmyadmin \
     -e MARIADB_USER=phpmyadmin -e MARIADB_PASSWORD=${MARIADB_PASSWORD} \
+    -e MARIADB_AUTO_UPGRADE=1 \
     ${MARIADB_IMAGE} \
     --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ExecStartPost=/usr/bin/podman exec  mariadb-app /bin/bash -c 'printf "[client] \npassword=${MARIADB_ROOT_PASSWORD}" > /root/.my.cnf'
