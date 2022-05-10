@@ -4,8 +4,8 @@ Start and configure mariadb instance.
 
 The module uses : 
 
-docker.io/library/phpmyadmin  5.1.1
-docker.io/library/mariadb     10.6.5
+docker.io/library/phpmyadmin  5.1.3
+docker.io/library/mariadb     10.7.3
 
 ## Install
 
