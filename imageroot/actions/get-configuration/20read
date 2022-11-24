@@ -41,7 +41,7 @@ config["path"] =  rdb.hget(env, "TRAEFIK_PATH");
 config["http2https"] =  rdb.hget(env, "TRAEFIK_HTTP2HTTPS") == "True";
 # config["lets_encrypt"] =  rdb.hget(env, "TRAEFIK_LETS_ENCRYPT") == "True";
 
-# Find the hosname of the node
+# Find the hostname of the node
 config["hostname"] = socket.gethostname()
 
 # Dump the configuratio to stdou
