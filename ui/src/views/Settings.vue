@@ -139,7 +139,7 @@ export default {
       q: {
         page: "settings",
       },
-      hostname: location.hostname,
+      hostname: "",
       urlCheckInterval: null,
       path: "",
       mariadb_tcp_port: "",
@@ -220,6 +220,7 @@ export default {
     getConfigurationCompleted(taskContext, taskResult) {
       const config = taskResult.output;
       this.path = config.path;
+      this.hostname = config.hostname;
       this.mariadb_tcp_port = config.mariadb_tcp_port;
       // this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;

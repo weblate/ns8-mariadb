@@ -28,6 +28,7 @@ import os
 import sys
 import json
 import agent
+import socket
 
 # Prepare return variable
 config = {}
@@ -39,6 +40,9 @@ config["mariadb_tcp_port"] = rdb.hget(env, "MARIADB_TCP_PORT");
 config["path"] =  rdb.hget(env, "TRAEFIK_PATH");
 config["http2https"] =  rdb.hget(env, "TRAEFIK_HTTP2HTTPS") == "True";
 # config["lets_encrypt"] =  rdb.hget(env, "TRAEFIK_LETS_ENCRYPT") == "True";
+
+# Find the hostname of the node
+config["hostname"] = socket.gethostname()
 
 # Dump the configuratio to stdou
 json.dump(config, fp=sys.stdout)
