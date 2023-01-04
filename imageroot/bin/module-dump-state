@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+set -e
+
+mkdir -vp restore
+
+# test 
+if systemctl --user -q is-active mariadb-app; then
+    dbs=`podman exec mariadb-app mysql -BNre "show databases"` || exit 1
+    for db in $(echo $dbs)
+    do
+        if [ "$db" != "information_schema" ] && [ "$db" != "performance_schema" ]; then
+            podman exec mariadb-app  mysqldump --routines --flush-privileges --skip-dump-date --ignore-table=mysql.event --single-transaction --quick --add-drop-table -QB "$db" >  restore/"$db".sql || exit 1
+        fi
+    done
+fi
