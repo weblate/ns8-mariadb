@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#
+# Copyright (C) 2022 Nethesis S.r.l.
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+
+set -e -o pipefail
+exec 1>&2 # Redirect any output to the journal (stderr)
+
+# nothing to restore we exit
+if [ ! -d restore/ ]; then
+    exit 0
+fi
+
+# read env secret
+source ./secrets/passwords.secret
+
+#do the bash file to restore and exit once done
+cat - >restore/zz_roundcubemail_restore.sh <<'EOS'
+# Print additional information:
+mysql --version
+# The script is sourced, override entrypoint args and exit:
+set -- true
+docker_temp_server_stop
+exit 0
+EOS
+
+# once we exit we remove restore
+trap 'rm -rfv restore/' EXIT
+
+# we start a container to initiate a database and load the dump
+# at the end of roundcubemail_restore.sh the dump is loaded and 
+# we exit the container
+podman run \
+  --rm \
+  --interactive \
+  --network=none \
+  --volume=./restore:/docker-entrypoint-initdb.d:z \
+  --volume mysql-data:/var/lib/mysql/:Z \
+  --env MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD} \
+  --replace --name=restore_db \
+  ${MARIADB_IMAGE}
