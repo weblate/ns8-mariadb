@@ -8,11 +8,6 @@
 set -e -o pipefail
 exec 1>&2 # Redirect any output to the journal (stderr)
 
-# nothing to restore we exit
-if [ ! -d restore/ ]; then
-    exit 0
-fi
-
 # read env secret
 source ./secrets/passwords.secret
 
