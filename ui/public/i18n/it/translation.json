@@ -1,0 +1,50 @@
+{
+    "common": {
+        "required": "Obbligatorio",
+        "work_in_progress": "In lavorazione"
+    },
+    "status": {
+        "node": "Nodo",
+        "title": "Stato",
+        "services": "Servizio | Servizi",
+        "no_services": "Nessun servizio",
+        "name": "Nome",
+        "size": "Dimensione",
+        "created": "Creato",
+        "no_images": "Nessuna immagine",
+        "no_volumes": "Nessun volume",
+        "app_images": "Immagine app|Immagini app",
+        "app_instance": "Istanza app",
+        "app_volumes": "Volume app|Volumi app",
+        "installation_node": "Nodo",
+        "mount": "Percorso di mount"
+    },
+    "error": {
+        "404": "Risorsa non trovata",
+        "error": "Errore",
+        "validation_error": "Errore di validazione",
+        "network_error": "Errore di rete",
+        "cannot_retrieve_installed_modules": "Impossibile elencare moduli installati",
+        "cannot_retrieve_module_info": "Impossibile recuperare info modulo",
+        "generic_error": "Qualcosa è andato storto",
+        "network_timeout": "Timeout di rete",
+        "401": "Autenticazione non valida",
+        "403": "Operazione non autorizzata"
+    },
+    "settings": {
+        "save": "Salva",
+        "title": "Impostazioni"
+    },
+    "action": {
+        "configure-module": "Configura modulo",
+        "get-configuration": "Visualizza configurazione",
+        "get-module-info": "Visualizza info modulo",
+        "get-status": "Visualizza stato"
+    },
+    "about": {
+        "title": "Informazioni"
+    },
+    "task": {
+        "cannot_create_task": "Impossibile eseguire task {action}"
+    }
+}
