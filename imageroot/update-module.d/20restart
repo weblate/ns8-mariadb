@@ -20,4 +20,4 @@
 # along with NethServer.  If not, see COPYING.
 #
 
-systemctl --user restart mariadb.service
+systemctl --user try-restart mariadb.service
