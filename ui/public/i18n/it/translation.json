@@ -43,7 +43,10 @@
         "enabled": "Abilitato",
         "http_to_https": "Da HTTP a HTTPS",
         "phpmyadmin_path": "Percorso web di Phpmyadmin",
-        "disabled": "Disabilitato"
+        "disabled": "Disabilitato",
+        "link": "Link",
+        "instance_configuration": "{instance} configuration",
+        "webpath_already_used_in_traefik": "This web path is already used by another application in the web proxy."
     },
     "action": {
         "configure-module": "Configura modulo",
