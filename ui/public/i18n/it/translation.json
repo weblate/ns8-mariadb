@@ -17,7 +17,10 @@
         "app_instance": "Istanza app",
         "app_volumes": "Volume app|Volumi app",
         "installation_node": "Nodo",
-        "mount": "Percorso di mount"
+        "mount": "Percorso di mount",
+        "failed_services": "{num} servizio fallito | {num} servizi falliti",
+        "active_services": "{num} servizio attivo | {num} servizi attivi",
+        "inactive_services": "{num} servizio inattivo | {num} servizi inattivi"
     },
     "error": {
         "404": "Risorsa non trovata",
@@ -33,7 +36,17 @@
     },
     "settings": {
         "save": "Salva",
-        "title": "Impostazioni"
+        "title": "Impostazioni",
+        "path_pattern": "Percorso web per l'applicazione, esempio '/phpmyadmin'.",
+        "configuring": "Configurazione...",
+        "lets_encrypt": "Let's Encrypt",
+        "enabled": "Abilitato",
+        "http_to_https": "Da HTTP a HTTPS",
+        "phpmyadmin_path": "Percorso web di Phpmyadmin",
+        "disabled": "Disabilitato",
+        "link": "Link",
+        "instance_configuration": "{instance} configuration",
+        "webpath_already_used_in_traefik": "This web path is already used by another application in the web proxy."
     },
     "action": {
         "configure-module": "Configura modulo",
