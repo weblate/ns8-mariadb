@@ -1,7 +1,8 @@
 {
   "name": "MariaDB",
   "description": {
-    "en": "MariaDB Server is a SQL database, with its user interface PhpMyadmin"
+    "en": "MariaDB Server is a SQL database, it contains also the PhpMyadmin administration interface",
+    "it": "MariaDB Server è un database SQL, include l'interfaccia di amministrazione PhpMyadmin"
   },
   "categories": [
     "database"
