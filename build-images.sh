@@ -30,7 +30,7 @@ buildah config --entrypoint=/ \
     --label="org.nethserver.tcp-ports-demand=2" \
     --label="org.nethserver.rootfull=0" \
     --label="org.nethserver.authorizations=traefik@node:routeadm" \
-    --label="org.nethserver.images=docker.io/mariadb:10.7.3 docker.io/phpmyadmin/phpmyadmin:5.1.3" \
+    --label="org.nethserver.images=docker.io/mariadb:10.11.3 docker.io/phpmyadmin/phpmyadmin:5.1.3" \
     "${container}"
 # Commit everything
 buildah commit "${container}" "${repobase}/${reponame}"
