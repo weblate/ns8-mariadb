@@ -72,3 +72,17 @@ it is possible to use directly mysql inside the container
 ssh mariadb1@localhost
 podman exec -ti mariadb-app mysql
 ```
+
+This is how to create a database and a user, think to allow the user to connect from any IP, else he will be refused by the mariadb container. The external port of mariadb is restricted to 127.0.0.1
+
+```
+# connect to mariadb1 (module_id)
+ssh mariadb1@localhost
+# connect to the mysql container as root
+podman exec -ti mariadb-app mysql
+# create the database and grant user to all from any IP (external port is restricted to 127.0.0.1)
+MariaDB [(none)]> CREATE DATABASE IF NOT EXISTS mydatabase;
+MariaDB [(none)]> grant all privileges on mydatabase.* to username identified by 'password';
+MariaDB [(none)]> flush privileges;
+MariaDB [(none)]> exit
+```
