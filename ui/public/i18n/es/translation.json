@@ -18,21 +18,50 @@
         "lets_encrypt": "Let's Encrypt",
         "save": "Guardar",
         "enabled": "Habilitado",
-        "title": "Ajustes"
+        "title": "Ajustes",
+        "phpmyadmin_path": "Ruta web de Phpmyadmin",
+        "phpmyadmin_url": "Aplicación web PhpMyAdmin",
+        "webpath_already_used_in_traefik": "Esta ruta web ya la utiliza otra aplicación en el proxy web.",
+        "mariadb_tcp_port_tips": "Este puerto es necesario para conectar un cliente mysql al servidor mysql: mysql -u usuario -h host -P puerto -p",
+        "instance_configuration": "Configuración de {instance}",
+        "admin_login_tips": "El inicio de sesión:contraseña predeterminada es admin:admin, debes cambiarla en el primer inicio de sesión",
+        "path_pattern": "Ruta web para la aplicación web, como '/phpmyadmin'",
+        "link": "Enlace",
+        "mariadb_tcp_port": "Puerto TCP externo mariadb"
     },
     "status": {
         "no_images": "No hay imágenes",
         "no_services": "No hay servicios",
-        "no_volumes": "No hay volúmenes"
+        "no_volumes": "No hay volúmenes",
+        "created": "Creado",
+        "size": "Tamaño",
+        "name": "Nombre",
+        "app_volumes": "Volúmen de App | Volúmenes de App",
+        "services": "Servicio | Servicios",
+        "app_images": "Imagen de App | Imágenes de App",
+        "failed_services": "{num} servicio fallido | {num} servicios fallidos",
+        "active_services": "{num} servicio activo | {num} servicios activos",
+        "inactive_services": "{num} servicio inactivo | {num} servicios inactivos",
+        "app_instance": "Instancia de aplicación",
+        "mount": "Montar",
+        "title": "Estado",
+        "installation_node": "Nodo de instalación",
+        "node": "Nodo"
     },
     "about": {
         "title": "Acerca de"
     },
     "action": {
         "get-module-info": "Obtener información del módulo",
-        "get-status": "Obtener estado"
+        "get-status": "Obtener estado",
+        "configure-module": "Configurar módulo",
+        "get-configuration": "Obtener la configuración"
     },
     "task": {
         "cannot_create_task": "No se puede crear la tarea {action}"
+    },
+    "common": {
+        "required": "Requerido",
+        "work_in_progress": "Trabajo en progreso"
     }
 }
