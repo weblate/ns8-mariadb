@@ -1,67 +1,67 @@
 {
     "error": {
-        "403": "Operation not authorized",
-        "cannot_retrieve_installed_modules": "Cannot retrieve installed modules",
-        "401": "Invalid authentication",
-        "cannot_retrieve_module_info": "Cannot retrieve module info",
-        "generic_error": "Something went wrong",
+        "403": "Operación no autorizada",
+        "cannot_retrieve_installed_modules": "No es posible recibir los módulos instalados",
+        "401": "Autenticación no válida",
+        "cannot_retrieve_module_info": "No es posible recibir la información del módulo",
+        "generic_error": "Algo ha salido mal",
         "error": "Error",
-        "network_timeout": "Network timeout",
-        "404": "Resource not found",
-        "network_error": "Network error",
-        "validation_error": "Validation error"
+        "network_timeout": "Tiempo de espera de red agotado",
+        "404": "Recurso no encontrado",
+        "network_error": "Error de red",
+        "validation_error": "Error de validación"
     },
     "settings": {
-        "configuring": "Configuring...",
-        "disabled": "Disabled",
-        "http_to_https": "HTTP to HTTPS",
+        "configuring": "Configurando...",
+        "disabled": "Deshabilitado",
+        "http_to_https": "HTTP a HTTPS",
         "lets_encrypt": "Let's Encrypt",
-        "save": "Save",
-        "enabled": "Enabled",
-        "title": "Settings",
+        "save": "Guardar",
+        "enabled": "Habilitado",
+        "title": "Ajustes",
         "phpmyadmin_path": "Ruta web de Phpmyadmin",
         "phpmyadmin_url": "Aplicación web PhpMyAdmin",
-        "webpath_already_used_in_traefik": "This web path is already used by another application in the web proxy.",
+        "webpath_already_used_in_traefik": "Esta ruta web ya la utiliza otra aplicación en el proxy web.",
         "mariadb_tcp_port_tips": "Este puerto es necesario para conectar un cliente mysql al servidor mysql: mysql -u usuario -h host -P puerto -p",
-        "instance_configuration": "{instance} configuration",
+        "instance_configuration": "Configuración de {instance}",
         "admin_login_tips": "El inicio de sesión:contraseña predeterminada es admin:admin, debes cambiarla en el primer inicio de sesión",
         "path_pattern": "Ruta web para la aplicación web, como '/phpmyadmin'",
-        "link": "Link",
+        "link": "Enlace",
         "mariadb_tcp_port": "Puerto TCP externo mariadb"
     },
     "status": {
-        "no_images": "No images",
-        "no_services": "No services",
-        "no_volumes": "No volumes",
-        "created": "Created",
-        "size": "Size",
-        "name": "Name",
-        "app_volumes": "App volume | App volumes",
-        "services": "Service | Services",
-        "app_images": "App image | App images",
+        "no_images": "No hay imágenes",
+        "no_services": "No hay servicios",
+        "no_volumes": "Sin volúmenes",
+        "created": "Creado",
+        "size": "Tamaño",
+        "name": "Nombre",
+        "app_volumes": "Volúmen de aplicación | Volúmenes de aplicaciones",
+        "services": "Servicio | Servicios",
+        "app_images": "Imagen de App | Imágenes de App",
         "failed_services": "{num} servicio fallido | {num} servicios fallidos",
         "active_services": "{num} servicio activo | {num} servicios activos",
         "inactive_services": "{num} servicio inactivo | {num} servicios inactivos",
-        "app_instance": "App instance",
-        "mount": "Mount",
-        "title": "Status",
-        "installation_node": "Installation node",
-        "node": "Node"
+        "app_instance": "Instancia de la aplicación",
+        "mount": "Montar",
+        "title": "Estado",
+        "installation_node": "Nodo de instalación",
+        "node": "Nodo"
     },
     "about": {
-        "title": "About"
+        "title": "Acerca de"
     },
     "action": {
-        "get-module-info": "Get module info",
-        "get-status": "Get status",
-        "configure-module": "Configure module",
-        "get-configuration": "Get configuration"
+        "get-module-info": "Obtener información del módulo",
+        "get-status": "Obtener el estado",
+        "configure-module": "Configurar el módulo",
+        "get-configuration": "Obtener la configuración"
     },
     "task": {
-        "cannot_create_task": "Cannot create task {action}"
+        "cannot_create_task": "No se puede crear la tarea {action}"
     },
     "common": {
-        "required": "Requerido",
-        "work_in_progress": "Work in progress"
+        "required": "Obligatorio",
+        "work_in_progress": "Trabajo en curso"
     }
 }
