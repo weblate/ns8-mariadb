@@ -1,1 +1,38 @@
-{}
+{
+    "error": {
+        "403": "Operación no autorizada",
+        "cannot_retrieve_installed_modules": "No es posible recibir los módulos instalados",
+        "401": "Autenticación no válida",
+        "cannot_retrieve_module_info": "No es posible recibir la información del módulo",
+        "generic_error": "Algo ha salido mal",
+        "error": "Error",
+        "network_timeout": "Tiempo de espera de red agotado",
+        "404": "Recurso no encontrado",
+        "network_error": "Error de red",
+        "validation_error": "Error de validación"
+    },
+    "settings": {
+        "configuring": "Configurando...",
+        "disabled": "Deshabilitado",
+        "http_to_https": "HTTP a HTTPS",
+        "lets_encrypt": "Let's Encrypt",
+        "save": "Guardar",
+        "enabled": "Habilitado",
+        "title": "Ajustes"
+    },
+    "status": {
+        "no_images": "No hay imágenes",
+        "no_services": "No hay servicios",
+        "no_volumes": "No hay volúmenes"
+    },
+    "about": {
+        "title": "Acerca de"
+    },
+    "action": {
+        "get-module-info": "Obtener información del módulo",
+        "get-status": "Obtener estado"
+    },
+    "task": {
+        "cannot_create_task": "No se puede crear la tarea {action}"
+    }
+}
