@@ -1,7 +1,8 @@
 {
   "common": {
     "required": "Required",
-    "work_in_progress": "Work in progress"
+    "work_in_progress": "Work in progress",
+    "eg_value": "E.g. {value}"
   },
   "status": {
     "title": "Status",
@@ -39,8 +40,7 @@
     "phpmyadmin_url": "PhpMyAdmin web application",
     "link": "Link",
     "admin_login_tips": "The default login:password is admin:admin, you must change it at the first login",
-    "phpmyadmin_path_tips": "Enter a unique HTTP path, for example '/phpmyadmin'",
-    "For_example": "For example"
+    "phpmyadmin_path_tips": "Enter a unique HTTP path, for example '/phpmyadmin'"
   },
   "about": {
     "title": "About"
