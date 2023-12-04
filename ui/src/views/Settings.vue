@@ -19,16 +19,27 @@
       <div class="bx--col-lg-16">
         <cv-tile :light="true">
           <cv-form @submit.prevent="configureModule">
-            <cv-text-input
+            <NsTextInput
               :label="$t('settings.phpmyadmin_path')"
-              placeholder="/phpmyadmin"
+              placeholder="e.g. /phpmyadmin"
               v-model.trim="path"
               class="mg-bottom"
               :invalid-message="$t(error.path)"
               :disabled="loading.getConfiguration || loading.configureModule"
               ref="path"
+              tooltipAlignment="center"
+              tooltipDirection="right"
             >
-            </cv-text-input>
+              <template slot="tooltip">
+                <div
+                  v-html="
+                    $t(
+                      'settings.phpmyadmin_path_tips'
+                    )
+                  "
+                ></div>
+              </template>
+            </NsTextInput>
             <template v-if="mariadb_tcp_port">
               <span class="mg-bottom">
                 {{ $t("settings.mariadb_tcp_port") }}
