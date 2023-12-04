@@ -39,7 +39,8 @@
     "phpmyadmin_url": "PhpMyAdmin web application",
     "link": "Link",
     "admin_login_tips": "The default login:password is admin:admin, you must change it at the first login",
-    "phpmyadmin_path_tips": "Enter a unique HTTP path, for example '/phpmyadmin'"
+    "phpmyadmin_path_tips": "Enter a unique HTTP path, for example '/phpmyadmin'",
+    "For_example": "For example"
   },
   "about": {
     "title": "About"
