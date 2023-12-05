@@ -21,7 +21,7 @@
           <cv-form @submit.prevent="configureModule">
             <NsTextInput
               :label="$t('settings.phpmyadmin_path')"
-              :placeholder="$t('common.eg_value', {value: '/sftpgo'})"
+              :placeholder="$t('common.eg_value', {value: '/phpmyadmin'})"
               v-model.trim="path"
               class="mg-bottom"
               :invalid-message="$t(error.path)"
