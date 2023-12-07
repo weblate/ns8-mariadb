@@ -1,15 +1,15 @@
 {
     "error": {
         "403": "Operación no autorizada",
-        "cannot_retrieve_installed_modules": "No es posible recibir los módulos instalados",
-        "401": "Autenticación no válida",
-        "cannot_retrieve_module_info": "No es posible recibir la información del módulo",
+        "cannot_retrieve_installed_modules": "No se pueden recuperar los módulos instalados",
+        "401": "Autentificación no válida",
+        "cannot_retrieve_module_info": "No se puede recuperar la información del módulo",
         "generic_error": "Algo ha salido mal",
         "error": "Error",
         "network_timeout": "Tiempo de espera de red agotado",
         "404": "Recurso no encontrado",
-        "network_error": "Error de red",
-        "validation_error": "Error de validación"
+        "network_error": "Fallo de red",
+        "validation_error": "Fallo en la validación"
     },
     "settings": {
         "configuring": "Configurando...",
@@ -32,13 +32,13 @@
     "status": {
         "no_images": "No hay imágenes",
         "no_services": "No hay servicios",
-        "no_volumes": "Sin volúmenes",
+        "no_volumes": "No hay volúmenes",
         "created": "Creado",
         "size": "Tamaño",
         "name": "Nombre",
-        "app_volumes": "Volúmen de aplicación | Volúmenes de aplicaciones",
+        "app_volumes": "Volúmen de la aplicación | Volúmenes de la aplicación",
         "services": "Servicio | Servicios",
-        "app_images": "Imagen de App | Imágenes de App",
+        "app_images": "Imagen de la aplicación | Imágenes de la aplicación",
         "failed_services": "{num} servicio fallido | {num} servicios fallidos",
         "active_services": "{num} servicio activo | {num} servicios activos",
         "inactive_services": "{num} servicio inactivo | {num} servicios inactivos",
@@ -54,7 +54,7 @@
     "action": {
         "get-module-info": "Obtener información del módulo",
         "get-status": "Obtener el estado",
-        "configure-module": "Configurar el módulo",
+        "configure-module": "Configurar módulo",
         "get-configuration": "Obtener la configuración"
     },
     "task": {
@@ -62,6 +62,6 @@
     },
     "common": {
         "required": "Obligatorio",
-        "work_in_progress": "Trabajo en curso"
+        "work_in_progress": "En progreso"
     }
 }
