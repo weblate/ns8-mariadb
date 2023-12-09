@@ -62,6 +62,7 @@
     },
     "common": {
         "required": "Obligatorio",
-        "work_in_progress": "En progreso"
+        "work_in_progress": "En progreso",
+        "eg_value": "Ejemplo {value}"
     }
 }
