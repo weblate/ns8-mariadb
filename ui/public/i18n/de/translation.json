@@ -1,20 +1,27 @@
 {
     "common": {
         "required": "Erforderlich",
-        "eg_value": "E.g. {value}",
+        "eg_value": "z.B. {value}",
         "work_in_progress": "in Arbeit"
     },
     "settings": {
         "configuring": "Konfiguriere...",
-        "webpath_already_used_in_traefik": "This web path is already used by another application in the web proxy.",
-        "instance_configuration": "{instance} configuration",
+        "webpath_already_used_in_traefik": "Dieser Web-Pfad wird bereits von einer anderen Web-Anwendung im Proxy verwendet",
+        "instance_configuration": "{instance} Konfiguration",
         "http_to_https": "HTTP zu HTTPS",
         "lets_encrypt": "Let's Encrypt",
         "link": "Link",
         "disabled": "Deaktiviert",
         "save": "Speichern",
         "enabled": "Aktiviert",
-        "title": "Einstellungen"
+        "title": "Einstellungen",
+        "phpmyadmin_path": "PHPmyAdmin Web-Pfad",
+        "path_pattern": "Web-Pfad für die Web-Anwendung, z.B '/phpmyadmin'",
+        "mariadb_tcp_port": "externer MariaDB TCP-Port",
+        "mariadb_tcp_port_tips": "Über diesen Port können MySQL-Clients eine Verbindung zum Server herstellen: mysql -u Benutzer -h Host -p Port",
+        "phpmyadmin_url": "PHPmyAdmin Web-Anwendung",
+        "admin_login_tips": "Die initiale Anmeldedaten lauten admin:admin, diese müssen nach der ersten Anmeldung geändert werden",
+        "phpmyadmin_path_tips": "einzigartiger HTTP-Pfad , z.B. '/phpmyadmin'"
     },
     "error": {
         "generic_error": "Etwas ist schief gegangen",
@@ -48,7 +55,10 @@
         "title": "Status",
         "installation_node": "Installations-Knoten",
         "node": "Knoten",
-        "no_volumes": "Keine Volumen"
+        "no_volumes": "Keine Volumen",
+        "failed_services": "{num} Dienst fehlerhaft | {num} Dienste fehlerhaft",
+        "active_services": "{num} aktiver Dienst | {num} aktive Dienste",
+        "inactive_services": "{num} inaktiver Dienst | {num} inaktive Dienste"
     },
     "about": {
         "title": "Über"
