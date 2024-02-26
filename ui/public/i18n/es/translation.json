@@ -2,14 +2,14 @@
     "error": {
         "403": "Operación no autorizada",
         "cannot_retrieve_installed_modules": "No se pueden recuperar los módulos instalados",
-        "401": "Autenticación no válida",
+        "401": "Autentificación no válida",
         "cannot_retrieve_module_info": "No se puede recuperar la información del módulo",
         "generic_error": "Algo salió mal",
         "error": "Error",
         "network_timeout": "Tiempo de espera de red agotado",
         "404": "Recurso no encontrado",
         "network_error": "Fallo de red",
-        "validation_error": "Error de validación"
+        "validation_error": "Fallo en la validación"
     },
     "settings": {
         "configuring": "Configurando...",
