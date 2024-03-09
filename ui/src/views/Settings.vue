@@ -115,6 +115,29 @@
                 />
               </div>
             </div>
+            <NsTextInput
+              :label="$t('settings.upload_limit')"
+              v-model.trim="upload_limit"
+              class="mg-bottom"
+              :invalid-message="$t(error.upload_limit)"
+              :disabled="loading.getConfiguration || loading.configureModule"
+              ref="upload_limit"
+              tooltipAlignment="center"
+              tooltipDirection="right"
+              type="number"
+              min="2"
+              max="256"
+            >
+              <template slot="tooltip">
+                <div
+                  v-html="
+                    $t(
+                      'settings.upload_limit_tips'
+                    )
+                  "
+                ></div>
+              </template>
+            </NsTextInput>
             <NsButton
               kind="primary"
               :icon="Save20"
@@ -154,6 +177,7 @@ export default {
       urlCheckInterval: null,
       path: "",
       mariadb_tcp_port: "",
+      upload_limit: "2",
       // isLetsEncryptEnabled: false,
       isHttpToHttpsEnabled: false,
       loading: {
@@ -166,6 +190,7 @@ export default {
         path: "",
         lets_encrypt: "",
         http2https: "",
+        upload_limit: "",
       },
     };
   },
@@ -233,6 +258,7 @@ export default {
       this.path = config.path;
       this.hostname = config.hostname;
       this.mariadb_tcp_port = config.mariadb_tcp_port;
+      this.upload_limit = config.upload_limit;
       // this.isLetsEncryptEnabled = config.lets_encrypt;
       this.isHttpToHttpsEnabled = config.http2https;
       this.loading.getConfiguration = false;
@@ -302,6 +328,7 @@ export default {
             path: this.path,
             // lets_encrypt: this.isLetsEncryptEnabled,
             http2https: this.isHttpToHttpsEnabled,
+            upload_limit: this.upload_limit,
           },
           extra: {
             title: this.$t("settings.instance_configuration", {

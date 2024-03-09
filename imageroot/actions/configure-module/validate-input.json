@@ -10,7 +10,8 @@
   "type": "object",
   "required": [
     "path",
-    "http2https"
+    "http2https",
+    "upload_limit"
   ],
   "properties": {
     "path": {
@@ -22,6 +23,11 @@
       "type": "boolean",
       "title": "HTTP to HTTPS redirection",
       "description": "Redirect all the HTTP requests to HTTPS"
+    },
+    "upload_limit": {
+      "type": "string",
+      "title": "Upload limit",
+      "description": "Maximum upload size"
     }
   }
 }

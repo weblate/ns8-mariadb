@@ -7,20 +7,37 @@
       {
         "mariadb_tcp_port": "3306",
         "path": "/phpmyadmin",
-        "http2https": true
+        "http2https": true,
+        "upload_limit": "2M"
       }
     ],
     "type": "object",
     "required": [
       "path",
       "http2https",
-      "mariadb_tcp_port"
+      "mariadb_tcp_port",
+      "upload_limit"
     ],
     "properties": {
       "http2https": {
         "type": "boolean",
         "title": "HTTP to HTTPS redirection",
         "description": "Redirect all the HTTP requests to HTTPS"
+      },
+      "mariadb_tcp_port": {
+        "type": "string",
+        "title": "MariaDB TCP port",
+        "description": "TCP port used by MariaDB"
+      },
+      "path": {
+        "type": "string",
+        "title": "Path",
+        "description": "Path to access phpMyAdmin"
+      },
+      "upload_limit": {
+        "type": "string",
+        "title": "Upload limit",
+        "description": "Maximum upload size"
       }
     }
 }
