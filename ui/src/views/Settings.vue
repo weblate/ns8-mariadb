@@ -190,7 +190,7 @@ export default {
         path: "",
         lets_encrypt: "",
         http2https: "",
-        upload_limit,
+        upload_limit: "",
       },
     };
   },
