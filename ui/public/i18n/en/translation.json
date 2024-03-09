@@ -40,7 +40,9 @@
     "phpmyadmin_url": "PhpMyAdmin web application",
     "link": "Link",
     "admin_login_tips": "The default login:password is admin:admin, you must change it at the first login",
-    "phpmyadmin_path_tips": "Enter a unique HTTP path, for example '/phpmyadmin'"
+    "phpmyadmin_path_tips": "Enter a unique HTTP path, for example '/phpmyadmin'",
+    "upload_limit": "Upload limit (MB)",
+    "upload_limit_tips": "Maximum upload size for a database upload is 256MB"
   },
   "about": {
     "title": "About"
