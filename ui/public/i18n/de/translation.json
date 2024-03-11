@@ -21,7 +21,9 @@
         "mariadb_tcp_port_tips": "Über diesen Port können MySQL-Clients eine Verbindung zum Server herstellen: mysql -u Benutzer -h Host -p Port",
         "phpmyadmin_url": "PHPmyAdmin Web-Anwendung",
         "admin_login_tips": "Die initiale Anmeldedaten lauten admin:admin, diese müssen nach der ersten Anmeldung geändert werden",
-        "phpmyadmin_path_tips": "einzigartiger HTTP-Pfad , z.B. '/phpmyadmin'"
+        "phpmyadmin_path_tips": "einzigartiger HTTP-Pfad , z.B. '/phpmyadmin'",
+        "upload_limit": "Upload-Limit (MB)",
+        "upload_limit_tips": "Maximale Dateigröße für einen Datenbank-Upload beträgt 256MB"
     },
     "error": {
         "generic_error": "Etwas ist schief gegangen",
