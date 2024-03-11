@@ -28,7 +28,9 @@
         "path_pattern": "Ruta web para la aplicación web, como '/phpmyadmin'",
         "link": "Enlace",
         "mariadb_tcp_port": "Puerto TCP externo mariadb",
-        "phpmyadmin_path_tips": "Escribe una ruta HTTP única, por ejemplo \"/phpmyadmin\""
+        "phpmyadmin_path_tips": "Escribe una ruta HTTP única, por ejemplo \"/phpmyadmin\"",
+        "upload_limit": "Límite de subida (MB)",
+        "upload_limit_tips": "El tamaño máximo de carga para cargar una de base de datos es de 256 MB"
     },
     "status": {
         "no_images": "Sin imágenes",
