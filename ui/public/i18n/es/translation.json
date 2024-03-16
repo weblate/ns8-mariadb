@@ -13,11 +13,11 @@
     },
     "settings": {
         "configuring": "Configurando...",
-        "disabled": "Disabled",
+        "disabled": "Deshabilitado",
         "http_to_https": "HTTP a HTTPS",
         "lets_encrypt": "Let's Encrypt",
         "save": "Guardar",
-        "enabled": "Enabled",
+        "enabled": "Habilitado",
         "title": "Ajustes",
         "phpmyadmin_path": "Ruta web de Phpmyadmin",
         "phpmyadmin_url": "Aplicación web PhpMyAdmin",
