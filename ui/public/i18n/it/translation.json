@@ -1,7 +1,8 @@
 {
     "common": {
         "required": "Obbligatorio",
-        "work_in_progress": "In lavorazione"
+        "work_in_progress": "In lavorazione",
+        "eg_value": "Es. {value}"
     },
     "status": {
         "node": "Nodo",
@@ -40,10 +41,10 @@
         "path_pattern": "Percorso web per l'applicazione, esempio '/phpmyadmin'.",
         "configuring": "Configurazione...",
         "lets_encrypt": "Let's Encrypt",
-        "enabled": "Enabled",
+        "enabled": "Abilitato",
         "http_to_https": "Da HTTP a HTTPS",
         "phpmyadmin_path": "Percorso web di Phpmyadmin",
-        "disabled": "Disabled",
+        "disabled": "Disabilitato",
         "link": "Collegamento",
         "instance_configuration": "Configurazione di {instance}",
         "webpath_already_used_in_traefik": "Questo percorso web è già utilizzato da un'altra applicazione nel proxy web.",
