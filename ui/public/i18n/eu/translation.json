@@ -42,7 +42,10 @@
         "title": "Status",
         "installation_node": "Installation node",
         "node": "Node",
-        "no_volumes": "No volumes"
+        "no_volumes": "No volumes",
+        "failed_services": "{num} failed service | {num} failed services",
+        "active_services": "{num} active service | {num} active services",
+        "inactive_services": "{num} inactive service | {num} inactive services"
     },
     "about": {
         "title": "Honi buruz"
