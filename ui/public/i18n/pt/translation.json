@@ -18,7 +18,10 @@
         "mount": "Mount",
         "title": "Status",
         "installation_node": "Installation node",
-        "node": "Node"
+        "node": "Node",
+        "failed_services": "{num} failed service | {num} failed services",
+        "active_services": "{num} active service | {num} active services",
+        "inactive_services": "{num} inactive service | {num} inactive services"
     },
     "settings": {
         "disabled": "Disabled",
