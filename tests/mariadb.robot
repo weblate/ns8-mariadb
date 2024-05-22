@@ -24,7 +24,7 @@ Check mariadb path is configured
     Should Be True         ${HTTP2HTTPS}
     Should Not Be Empty    ${UPLOAD}
 
-Check if posgresql works as expected
+Check if mariadb works as expected
     Wait Until Keyword Succeeds    20 times    3 seconds    Ping mariadb
 
 Check if mariadb is removed correctly
