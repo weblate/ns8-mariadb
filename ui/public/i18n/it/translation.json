@@ -1,7 +1,8 @@
 {
     "common": {
         "required": "Obbligatorio",
-        "work_in_progress": "In lavorazione"
+        "work_in_progress": "In lavorazione",
+        "eg_value": "Es. {value}"
     },
     "status": {
         "node": "Nodo",

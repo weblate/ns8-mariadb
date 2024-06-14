@@ -1,0 +1,62 @@
+{
+    "common": {
+        "eg_value": "E.g. {value}",
+        "required": "Beharrezkoa",
+        "work_in_progress": "Work in progress"
+    },
+    "settings": {
+        "title": "Settings",
+        "configuring": "Configuring...",
+        "webpath_already_used_in_traefik": "This web path is already used by another application in the web proxy.",
+        "instance_configuration": "{instance} configuration",
+        "http_to_https": "HTTP to HTTPS",
+        "lets_encrypt": "Let's Encrypt",
+        "link": "Link",
+        "disabled": "Disabled",
+        "save": "Save",
+        "enabled": "Enabled"
+    },
+    "error": {
+        "403": "Operation not authorized",
+        "cannot_retrieve_installed_modules": "Cannot retrieve installed modules",
+        "401": "Invalid authentication",
+        "cannot_retrieve_module_info": "Cannot retrieve module info",
+        "generic_error": "Something went wrong",
+        "error": "Error",
+        "network_timeout": "Network timeout",
+        "404": "Resource not found",
+        "network_error": "Network error",
+        "validation_error": "Validation error"
+    },
+    "status": {
+        "created": "Created",
+        "size": "Size",
+        "name": "Name",
+        "no_images": "No images",
+        "app_volumes": "App volume | App volumes",
+        "services": "Service | Services",
+        "app_images": "App image | App images",
+        "no_services": "No services",
+        "app_instance": "App instance",
+        "mount": "Mount",
+        "title": "Status",
+        "installation_node": "Installation node",
+        "node": "Node",
+        "no_volumes": "No volumes",
+        "failed_services": "{num} failed service | {num} failed services",
+        "active_services": "{num} active service | {num} active services",
+        "inactive_services": "{num} inactive service | {num} inactive services"
+    },
+    "about": {
+        "title": "Honi buruz"
+    },
+    "action": {
+        "get-module-info": "Get module info",
+        "get-status": "Get status",
+        "configure-module": "Configure module",
+        "get-configuration": "Get configuration"
+    },
+    "task": {
+        "cannot_create_task": "Cannot create task {action}"
+    }
+}
