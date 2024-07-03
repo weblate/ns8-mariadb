@@ -51,7 +51,10 @@
         "mariadb_tcp_port": "Porta TCP esterna di mariadb",
         "phpmyadmin_url": "Applicazione web PhpMyAdmin",
         "mariadb_tcp_port_tips": "Questa porta è necessaria per connettere un client mysql al server mysql: mysql -u user -h host -P port -p",
-        "admin_login_tips": "Le credenziali login:password predefinite sono admin:admin, è necessario cambiarle al primo accesso."
+        "admin_login_tips": "Le credenziali login:password predefinite sono admin:admin, è necessario cambiarle al primo accesso.",
+        "upload_limit": "Upload limit (MB)",
+        "upload_limit_tips": "Maximum upload size for a database upload is 256MB",
+        "phpmyadmin_path_tips": "Enter a unique HTTP path, for example '/phpmyadmin'"
     },
     "action": {
         "configure-module": "Configura modulo",
@@ -63,6 +66,6 @@
         "title": "Informazioni"
     },
     "task": {
-        "cannot_create_task": "Impossibile eseguire task {action}"
+        "cannot_create_task": "Impossibile eseguire il task {action}"
     }
 }
