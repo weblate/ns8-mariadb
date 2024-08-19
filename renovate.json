@@ -1,0 +1,25 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base"],
+  "ignorePaths": ["**/ui/**"],
+  "regexManagers": [
+    {
+      "fileMatch": ["build-images.sh"],
+      "matchStrings": ["docker\\.io/mariadb:(?<currentValue>[^\\s]+)"],
+      "depNameTemplate": "mariadb",
+      "datasourceTemplate": "docker"
+    },
+    {
+      "fileMatch": ["build-images.sh"],
+      "matchStrings": ["docker\\.io/phpmyadmin/phpmyadmin:(?<currentValue>[-0-9\\.]+)"],
+      "depNameTemplate": "phpmyadmin/phpmyadmin",
+      "datasourceTemplate": "docker"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["mariadb"],
+      "allowedVersions": "<= 10.11"
+    }
+  ]
+}
