@@ -21,7 +21,7 @@
           <cv-form @submit.prevent="configureModule">
             <NsTextInput
               :label="$t('settings.phpmyadmin_path')"
-              :placeholder="$t('common.eg_value', {value: '/phpmyadmin'})"
+              :placeholder="$t('common.eg_value', { value: '/phpmyadmin' })"
               v-model.trim="path"
               class="mg-bottom"
               :invalid-message="$t(error.path)"
@@ -31,13 +31,7 @@
               tooltipDirection="right"
             >
               <template slot="tooltip">
-                <div
-                  v-html="
-                    $t(
-                      'settings.phpmyadmin_path_tips'
-                    )
-                  "
-                ></div>
+                <div>{{ $t("settings.phpmyadmin_path_tips") }}</div>
               </template>
             </NsTextInput>
             <template v-if="mariadb_tcp_port">
@@ -129,13 +123,7 @@
               max="256"
             >
               <template slot="tooltip">
-                <div
-                  v-html="
-                    $t(
-                      'settings.upload_limit_tips'
-                    )
-                  "
-                ></div>
+                <div>{{ $t("settings.upload_limit_tips") }}</div>
               </template>
             </NsTextInput>
             <NsButton
