@@ -52,9 +52,9 @@
         "phpmyadmin_url": "Applicazione web PhpMyAdmin",
         "mariadb_tcp_port_tips": "Questa porta è necessaria per connettere un client mysql al server mysql: mysql -u user -h host -P port -p",
         "admin_login_tips": "Le credenziali login:password predefinite sono admin:admin, è necessario cambiarle al primo accesso.",
-        "upload_limit": "Upload limit (MB)",
-        "upload_limit_tips": "Maximum upload size for a database upload is 256MB",
-        "phpmyadmin_path_tips": "Enter a unique HTTP path, for example '/phpmyadmin'"
+        "upload_limit": "Limite di caricamento (MB)",
+        "upload_limit_tips": "La dimensione massima di caricamento per un database è 256 MB",
+        "phpmyadmin_path_tips": "Inserisci un percorso HTTP univoco, ad esempio '/phpmyadmin'"
     },
     "action": {
         "configure-module": "Configura modulo",
