@@ -1,0 +1,71 @@
+{
+    "status": {
+        "node": "Node",
+        "created": "Created",
+        "size": "Size",
+        "name": "Name",
+        "mount": "Mount",
+        "no_volumes": "No volumes",
+        "no_images": "No images",
+        "app_volumes": "App volume | App volumes",
+        "services": "Service | Services",
+        "app_images": "App image | App images",
+        "failed_services": "{num} தோல்வியுற்ற பணி | {num} தோல்வியுற்ற சேவைகள்",
+        "active_services": "{num} செயலில் பணி | {num} செயலில் உள்ள சேவைகள்",
+        "no_services": "No services",
+        "inactive_services": "{num} செயலற்ற பணி | {num} செயலற்ற சேவைகள்",
+        "app_instance": "App instance",
+        "title": "Status",
+        "installation_node": "Installation node"
+    },
+    "settings": {
+        "phpmyadmin_path": "Phpmyadmin வலை பாதை",
+        "webpath_already_used_in_traefik": "This web path is already used by another application in the web proxy.",
+        "path_pattern": "வலை பயன்பாட்டிற்கான வலை பாதை, '/phpmyadmin'",
+        "title": "Settings",
+        "configuring": "உள்ளமைத்தல் ...",
+        "upload_limit": "பதிவேற்றும் வரம்பு (எம்பி)",
+        "phpmyadmin_url": "Phpmyadmin வலை பயன்பாடு",
+        "disabled": "Disabled",
+        "mariadb_tcp_port_tips": "MySQL கிளையண்டை MySQL சேவையகத்துடன் இணைக்க இந்த துறைமுகம் தேவை: mysql -u பயனர் -h புரவலன் -p துறைமுகம் -p",
+        "instance_configuration": "{instance} configuration",
+        "admin_login_tips": "இயல்புநிலை உள்நுழைவு: கடவுச்சொல் நிர்வாகி: நிர்வாகி, நீங்கள் அதை முதல் உள்நுழைவில் மாற்ற வேண்டும்",
+        "http_to_https": "Http பெறுநர் https",
+        "phpmyadmin_path_tips": "ஒரு தனித்துவமான HTTP பாதையை உள்ளிடவும், எடுத்துக்காட்டாக '/phpmyadmin'",
+        "lets_encrypt": "குறியாக்கம் செய்வோம்",
+        "save": "Save",
+        "enabled": "Enabled",
+        "link": "Link",
+        "mariadb_tcp_port": "வெளிப்புற மரியாடிபி டி.சி.பி துறைமுகம்",
+        "upload_limit_tips": "தரவுத்தள பதிவேற்றத்திற்கான அதிகபட்ச பதிவேற்ற அளவு 256MB ஆகும்"
+    },
+    "error": {
+        "403": "Operation not authorized",
+        "error": "Error",
+        "cannot_retrieve_installed_modules": "Cannot retrieve installed modules",
+        "401": "Invalid authentication",
+        "cannot_retrieve_module_info": "Cannot retrieve module info",
+        "generic_error": "Something went wrong",
+        "network_timeout": "Network timeout",
+        "404": "Resource not found",
+        "network_error": "Network error",
+        "validation_error": "Validation error"
+    },
+    "common": {
+        "required": "Required",
+        "eg_value": "E.g. {value}",
+        "work_in_progress": "Work in progress"
+    },
+    "about": {
+        "title": "About"
+    },
+    "action": {
+        "get-module-info": "Get module info",
+        "get-status": "Get status",
+        "configure-module": "Configure module",
+        "get-configuration": "Get configuration"
+    },
+    "task": {
+        "cannot_create_task": "Cannot create task {action}"
+    }
+}
